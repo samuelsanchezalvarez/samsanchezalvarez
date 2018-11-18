@@ -1,7 +1,14 @@
 FROM centos:7
+LABEL version=1.0
+LABEL description="Esto es un servidor Apache"
+LABEL vendor="Samuel Sanchez Alvarez"
 RUN yum -y install httpd
-WORKDIR /var/www/html
-ADD startbootstrap-freelancer-gh-pages .
-ENV contenido prueba
-RUN echo "$contenido" > /var/www/html/prueba.html
+COPY startbootstrap-freelancer-gh-pages /var/html/
+RUN echo "$(whoami)" > /var/www/html/user1.html
+RUN useradd samuel
+USER samuel
+RUN echo "$(whoami)" > /tmp/user2.html
+VOLUME /var/www/html
+USER root
+RUN cp /tmp/user2.html /var/www/html/user2.html
 CMD apachectl -DFOREGROUND
