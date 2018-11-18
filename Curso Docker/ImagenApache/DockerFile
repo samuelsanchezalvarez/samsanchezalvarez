@@ -1,4 +1,7 @@
 FROM centos:7
 RUN yum -y install httpd
-ADD startbootstrap-freelancer-gh-pages /var/www/html/
+WORKDIR /var/www/html
+ADD startbootstrap-freelancer-gh-pages .
+ENV contenido prueba
+RUN echo "$contenido" > /var/www/html/prueba.html
 CMD apachectl -DFOREGROUND
