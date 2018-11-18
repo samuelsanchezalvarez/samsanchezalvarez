@@ -1,0 +1,4 @@
+FROM centos:7
+RUN yum -y install httpd
+ADD startbootstrap-freelancer-gh-pages /var/www/html/
+CMD apachectl -DFOREGROUND
